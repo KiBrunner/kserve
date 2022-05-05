@@ -23,7 +23,7 @@ from alibiexplainer.anchor_images import AnchorImages
 from alibiexplainer.anchor_tabular import AnchorTabular
 from alibiexplainer.anchor_text import AnchorText
 from alibiexplainer.explainer_wrapper import ExplainerWrapper
-
+from alibiexplainer.kernel_shap import KernalShap
 logging.basicConfig(level=kserve.constants.KSERVE_LOGLEVEL)
 
 
@@ -31,6 +31,7 @@ class ExplainerMethod(Enum):
     anchor_tabular = "AnchorTabular"
     anchor_images = "AnchorImages"
     anchor_text = "AnchorText"
+    kernel_shap = "KernelShap"
 
     def __str__(self):
         return self.value
@@ -58,6 +59,8 @@ class AlibiExplainer(kserve.Model):
             self.wrapper = AnchorImages(self._predict_fn, explainer, **config)
         elif self.method is ExplainerMethod.anchor_text:
             self.wrapper = AnchorText(self._predict_fn, explainer, **config)
+        elif self.method is ExplainerMethod.kernel_shap:
+            self.wrapper = KernelShap(self._predict_fn, explainer, **config)
         else:
             raise NotImplementedError
 
@@ -80,6 +83,7 @@ class AlibiExplainer(kserve.Model):
             self.method is ExplainerMethod.anchor_tabular
             or self.method is ExplainerMethod.anchor_images
             or self.method is ExplainerMethod.anchor_text
+            or self.method is ExplainerMethod.kernel_shap
         ):
             explanation = self.wrapper.explain(request["instances"])
             explanationAsJsonStr = explanation.to_json()
