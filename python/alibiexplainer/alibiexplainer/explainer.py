@@ -85,6 +85,8 @@ class AlibiExplainer(kserve.Model):
             or self.method is ExplainerMethod.anchor_text
             or self.method is ExplainerMethod.kernel_shap
         ):
+            input_tensors = request
+            request = {"instances": [input_tensor.tolist() for input_tensor in input_tensors]}
             # explanation = self.wrapper.explain(request["instances"])
             explanation = self.wrapper.explain(np.array(request["instances"]))
             explanationAsJsonStr = explanation.to_json()
