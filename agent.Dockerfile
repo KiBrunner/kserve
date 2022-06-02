@@ -20,3 +20,10 @@ COPY third_party/ third_party/
 WORKDIR /ko-app
 COPY --from=builder /go/src/github.com/kserve/kserve/agent /ko-app/
 ENTRYPOINT ["/ko-app/agent"]
+
+
+# Gitlab:
+# sudo -s
+# docker login registry.gitlab.com
+# docker build -t registry.gitlab.com/te4580/obligation-overwatch-test/kserve-alibi-explainer:test1 -f agent.Dockerfile .
+# docker push registry.gitlab.com/te4580/obligation-overwatch-test/kserve-alibi-explainer:test1

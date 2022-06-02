@@ -20,12 +20,12 @@ from alibi.utils.wrappers import ArgmaxTransformer
 from alibiexplainer.explainer_wrapper import ExplainerWrapper
 from typing import Callable, List, Optional
 import shap
-from alibi.explainers import KernelShap
+# from alibi.explainers import KernelShap
 
 logging.basicConfig(level=kserve.constants.KSERVE_LOGLEVEL)
 
 
-class KernalShap(ExplainerWrapper):
+class KernelShap(ExplainerWrapper):
     def __init__(
         self,
         predict_fn: Callable,

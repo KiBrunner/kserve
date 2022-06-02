@@ -23,7 +23,7 @@ from alibiexplainer.anchor_images import AnchorImages
 from alibiexplainer.anchor_tabular import AnchorTabular
 from alibiexplainer.anchor_text import AnchorText
 from alibiexplainer.explainer_wrapper import ExplainerWrapper
-from alibiexplainer.kernel_shap import KernalShap
+from alibiexplainer.kernel_shap import KernelShap
 logging.basicConfig(level=kserve.constants.KSERVE_LOGLEVEL)
 
 
@@ -85,7 +85,8 @@ class AlibiExplainer(kserve.Model):
             or self.method is ExplainerMethod.anchor_text
             or self.method is ExplainerMethod.kernel_shap
         ):
-            explanation = self.wrapper.explain(request["instances"])
+            # explanation = self.wrapper.explain(request["instances"])
+            explanation = self.wrapper.explain(np.array(request["instances"]))
             explanationAsJsonStr = explanation.to_json()
             logging.info("Explanation: %s", explanationAsJsonStr)
             return json.loads(explanationAsJsonStr)
