@@ -14,5 +14,5 @@ ENTRYPOINT ["python", "-m", "alibiexplainer"]
 # Gitlab:
 # sudo -s
 # docker login registry.gitlab.com
-# docker build -t registry.gitlab.com/te4580/obligation-overwatch-test/kserve-alibi-explainer:test3 -f alibiexplainer.Dockerfile .
-# docker push registry.gitlab.com/te4580/obligation-overwatch-test/kserve-alibi-explainer:test3
+# docker build -t registry.gitlab.com/te4580/obligation-overwatch-test/kserve-alibi-explainer:test4 -f alibiexplainer.Dockerfile .
+# docker push registry.gitlab.com/te4580/obligation-overwatch-test/kserve-alibi-explainer:test4

@@ -164,6 +164,10 @@ def parse_args(sys_args):
     parser_anchor_tabular = subparsers.add_parser(str(ExplainerMethod.anchor_tabular))
     addCommonParserArgs(parser_anchor_tabular)
 
+    # Kernel Shap Arguments
+    parser_kernel_shap = subparsers.add_parser(str(ExplainerMethod.kernel_shap))
+    addCommonParserArgs(parser_kernel_shap)
+
     # Anchor Text Arguments
     parser_anchor_text = subparsers.add_parser(str(ExplainerMethod.anchor_text))
     parser_anchor_text.add_argument(
