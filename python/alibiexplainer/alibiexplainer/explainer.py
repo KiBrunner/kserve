@@ -86,8 +86,8 @@ class AlibiExplainer(kserve.Model):
             or self.method is ExplainerMethod.anchor_text
             or self.method is ExplainerMethod.kernel_shap
         ):
-            explanation = self.wrapper.explain(request["instances"])
-            # explanation = self.wrapper.explain(np.array(request["instances"]))
+            # explanation = self.wrapper.explain(request["instances"])
+            explanation = self.wrapper.explain(np.array(request["instances"]))
             explanationAsJsonStr = explanation.to_json()
             logging.info("Explanation: %s", explanationAsJsonStr)
             return json.loads(explanationAsJsonStr)
