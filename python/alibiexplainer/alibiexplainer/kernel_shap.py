@@ -57,5 +57,7 @@ class KernelShap(ExplainerWrapper):
             )
 
         # We assume the input has batch dimension but Alibi explainers presently assume no batch
-        shap_exp = self.kernel_shap.explain(arr[0], **self.kwargs)
+        shap_exp = self.kernel_shap.explain(arr, **self.kwargs)
+        # shap_exp = self.kernel_shap.explain(arr[0], **self.kwargs)
+
         return shap_exp
