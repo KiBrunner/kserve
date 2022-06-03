@@ -75,8 +75,7 @@ class AlibiExplainer(kserve.Model):
             else:
                 instances.append(req_data)
         loop = asyncio.get_running_loop()  # type: ignore
-        # resp = loop.run_until_complete(self.predict({"instances": instances}))
-        resp = loop.run_until_complete(self.predictor({"instances": instances}))
+        resp = loop.run_until_complete(self.predict({"instances": instances}))
         return np.array(resp["predictions"])
 
     def explain(self, request: Dict) -> Any:

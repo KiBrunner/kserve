@@ -43,18 +43,18 @@ class KernelShap(ExplainerWrapper):
         arr = np.array(inputs)
         # set kernel_shap predict function so it always returns predicted class
         # See kernel_shap.__init__
-        # logging.info("Arr shape %s ", (arr.shape,))
+        logging.info("Arr shape %s ", (arr.shape,))
 
         # check if predictor returns predicted class or prediction probabilities for each class
         # if needed adjust predictor so it returns the predicted class
-        # if np.argmax(self.predict_fn(arr).shape) == 0:
-        #     self.kernel_shap.predictor = self.predict_fn
-        #     self.kernel_shap.samplers[0].predictor = self.predict_fn
-        # else:
-        #     self.kernel_shap.predictor = ArgmaxTransformer(self.predict_fn)
-        #     self.kernel_shap.samplers[0].predictor = ArgmaxTransformer(
-        #         self.predict_fn
-        #     )
+        if np.argmax(self.predict_fn(arr).shape) == 0:
+            self.kernel_shap.predictor = self.predict_fn
+            self.kernel_shap.samplers[0].predictor = self.predict_fn
+        else:
+            self.kernel_shap.predictor = ArgmaxTransformer(self.predict_fn)
+            self.kernel_shap.samplers[0].predictor = ArgmaxTransformer(
+                self.predict_fn
+            )
 
         # We assume the input has batch dimension but Alibi explainers presently assume no batch
         shap_exp = self.kernel_shap.explain(arr)
